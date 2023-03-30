@@ -1,0 +1,60 @@
+{
+    "listData": {
+                "properties": {
+                    "title":"Conflitto rilevato",
+                    "backgroundImage":"",
+                    "skillIcon":"",
+                    "messaggio":"",
+                    "secondoMessaggio":"",
+                    "opzioni":"",
+                    "number":"",
+            "list": {
+                "listItems": [
+                    {
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                        
+                    },
+                    {
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    }
+                ]
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "listData": {
+                "properties": {
+                        "title":"Ecco le azioni  della tua routine",
+                        "backgroundImage":"",
+                        "skillIcon":"",
+            "list": {
+                "listItems": [
+                    {
+                        "picture": {
+                            "value": ""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "picture": {
+                            "value":""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                        
+                    },
+                    {
+                        "picture": {
+                            "value":""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "picture": {
+                            "value":""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "picture": {
+                            "value":""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    },
+                    {
+                        "picture": {
+                            "value":""
+                        },
+                        "option": {
+                            "type": "literal",
+                            "value": ""
+                        },
+                        "id": {
+                            "type": "literal",
+                            "value": ""
+                        }
+                    }
+                    
+                ]
+            }
+        }
+    }
+}

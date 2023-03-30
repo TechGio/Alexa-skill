@@ -1,0 +1,110 @@
+{
+    "textListData": {
+        "type": "object",
+        "objectId": "textListSample",
+        "backgroundImage": {
+            "contentDescription": null,
+            "smallSourceUrl": null,
+            "largeSourceUrl": null,
+            "sources": [
+                {
+                    "url": "",
+                    "size": "large"
+                }
+            ]
+        },
+        "title": "<i>Elenco log</i>",
+        "listItems": [
+            {
+                "primaryText": "<i>"
+            },
+            {
+                "primaryText": "<i>"
+            },
+            {
+                "primaryText": "<i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            },
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            ,
+            {
+                "primaryText": "<i></i>"
+            }
+            
+            
+            
+        ],
+        "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/logo/logo-modern-botanical-white.png"
+    }
+}

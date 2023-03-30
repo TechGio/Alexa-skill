@@ -1,0 +1,291 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 22,
+                "textSizeDetails": 14,
+                "textSizeSecondaryHint": 19
+                
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 30,
+                "marginRight": 40,
+                "marginBottom": 50
+            }
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "textStyleSecondary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "100",
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStyleBody": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "textStyle": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        },
+         "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "arial",
+                "fontStyle": "oblique",
+                "fontSize": "@textSizeDetails",
+                "color": "@colorTextPrimary"
+            }
+        },
+        "textStyleDetails": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "500",
+                "fontSize": "@textSizeDetails"
+            }
+        }
+    },
+    "layouts": {
+        "FullHorizontalListItem": {
+            "parameters": [
+                "listLength"
+            ],
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "id": "mycontainer",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "alignItems": "center",
+                        "justifyContent": "end",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "position": "absolute",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "overlayColor": "rgba(0, 0, 0, 0.4)",
+                                "source": "${data.picture.value}",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.option.value}",
+                                "style": "textStyleBody",
+                                "maxLines": 1
+                            }
+                            
+                           
+                        ]
+                    },
+                    "onPress": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data.option.value}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "HorizontalListItem": {
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "maxWidth": 528,
+                        "minWidth": 312,
+                        "paddingLeft": 16,
+                        "paddingRight": 16,
+                        "height": "100%",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${data.picture.value}",
+                                "height": "30vh",
+                                "width": "21vw",
+                                "top":"17vh",
+                                "scale": "fill"
+                                
+                            },
+                            {
+                                "type": "Text",
+                                "text": "<b>${ordinal}.</b> ${data.option.value}",
+                                "style": "textStyle",
+                                "maxLines": 2,
+                                "top":"21vh",
+                                "spacing": 7
+                            }
+                        ]
+                    },
+                    "onPress": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data.option.value}",
+                                "${ordinal}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "ListLayout": {
+            "parameters": [
+                "backgroundImage",
+                "skillIcon",
+                "title",
+                "hintText",
+                "headerSubTitle",
+                "list"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "Container",
+                    "height": "100%",
+                    "width": "100%",
+                    "items": [
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "horizontal",
+                            "data": "${list}",
+                            "height": "100%",
+                            "width": "100%",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "FullHorizontalListItem",
+                                    "listLength": "${payload.listData.properties.list.listItems.length}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${backgroundImage}",
+                            "scale": "best-fill",
+                            "height": "100vh",
+                            "width": "100vw",
+                            "position": "absolute",
+                            "opacity": "0.5"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "${title}",
+                            "headerSubtitle":"${headerSubTitle}",
+                            "headerAttributionImage": "${skillIcon}"
+                        },
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "horizontal",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "data": "${list}",
+                            "height": "70vh",
+                            "width": "100%",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "HorizontalListItem"
+                                }
+                            ]
+                            
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "style":"textStyleSecondaryHint",
+                            "footerHint": "${payload.listData.properties.hintText}"
+                        
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": [
+            {
+                "type": "ListLayout",
+                "backgroundImage":  "${payload.listData.properties.backgroundImage}",
+                "skillIcon": "${payload.listData.properties.skillIcon}",
+                "title": "${payload.listData.properties.title}",
+                "list": "${payload.listData.properties.list.listItems}",
+                "hintText": "${payload.listData.properties.hintText}",
+                "headerSubTitle": "${payload.listData.properties.headerSubTitle}"
+            }
+        ]
+    }
+}

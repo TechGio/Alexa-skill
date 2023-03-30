@@ -1,0 +1,226 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 22,
+                "textSizeDetails": 14,
+                "textSizeSecondaryHint": 23
+                
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 50,
+                "marginRight": 50,
+                "marginBottom": 50
+            }
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "textStyleSecondary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "100",
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStyleBody": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "textStyle": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        },
+         "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "arial",
+                "fontStyle": "oblique",
+                "fontSize": "@textSizeDetails",
+                "color": "@colorTextPrimary"
+            }
+        },
+        "textStyleDetails": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "500",
+                "fontSize": "@textSizeDetails"
+            }
+        }
+    },
+    "layouts": {
+        "HorizontalListItem": {
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "maxWidth": 800,
+                        "minWidth": 312,
+                        "paddingLeft": 16,
+                        "paddingRight": 16,
+                        "height": "40%",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${data.picture.value}",
+                                "height": "8vh",
+                                "width": "8vw",
+                                "position": "absolute",
+                                "top": "1vh",
+                                "display": "${data.option.value != '' ? 'normal' : 'none'}"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.option.value}",
+                                "style": "textStyle",
+                                "width": "200vw",
+                                "left": "14vh",
+                                "top":"2vh",
+                                "spacing": 7,
+                                "display": "${data.option.value != '' ? 'normal' : 'none'}"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.id.value}",
+                                "style": "textStyle",
+                                "width": "200vw",
+                                "display":"none",
+                                "left": "27vh",
+                                "top":"10vh",
+                                "spacing": 7
+                            }
+                          ]
+                    },
+                    "onPress": [
+                        {
+                            "when":"${data.option.value != ''}",
+                            "type": "SendEvent",
+                            "arguments": [
+                                "mod${data.option.value}",
+                                "${ordinal}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "ListLayout": {
+            "parameters": [
+                "backgroundImage",
+                "skillIcon",
+                "title",
+                "headerSubTitle",
+                "list"
+            ],
+            "items": [
+                
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${backgroundImage}",
+                            "scale": "best-fill",
+                            "height": "100vh",
+                            "width": "100vw",
+                            "position": "absolute",
+                            "opacity": "0.5"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "${title}",
+                            "headerSubtitle":"${headerSubTitle}",
+                            "headerAttributionImage": "${skillIcon}"
+                        },
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "vertical",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "data": "${list}",
+                            "height": "60vh",
+                            "width": "100%",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "HorizontalListItem"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "style":"textStyleSecondaryHint",
+                            "footerHint": "${listData.properties.hintText}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "listData"
+        ],
+        "item": [
+            {
+                "type": "ListLayout",
+                "backgroundImage":  "${listData.properties.backgroundImage}",
+                "skillIcon": "${listData.properties.skillIcon}",
+                "title": "${listData.properties.title}",
+                "list": "${listData.properties.list.listItems}"
+            }
+        ]
+    }
+}

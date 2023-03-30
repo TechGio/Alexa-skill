@@ -1,0 +1,219 @@
+{
+    "type": "APL",
+    "version": "2023.1",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.6.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+          "strings": {
+            "myBoldFontWeight": "900"
+          }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 22,
+                "textSizeDetails": 14,
+                "textSizeSecondaryHint": 23
+                
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 50,
+                "marginRight": 5,
+                "marginBottom": 50
+            }
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "textStyleSecondary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "100",
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStyleBody": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "textStyle": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizePrimary",
+                "color": "@colorTextPrimary"
+            }
+        },
+         "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "arial",
+                "fontStyle": "oblique",
+                "fontSize": "@textSizeDetails",
+                "color": "@colorTextPrimary"
+            }
+        },
+        "textStyleDetails": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "500",
+                "fontSize": "@textSizeDetails"
+            }
+        }
+    },
+    "layouts": {
+        "HorizontalListItem": {
+          "item": [
+                 {
+                    "type": "AlexaButton",
+                    "buttonText": "${data.option.value}",
+                    "touchForward": "${touchForwardSetting}",
+                    "display": "${data.option.value != '' ? 'normal' : 'none'}",
+                    "primaryAction": {
+                      "type": "SendEvent",
+                      "when":"${data.option.value != ''}",
+                      "arguments": [
+                                "${data.option.value}"
+                            ]
+                    }
+                  }
+            ]
+        },
+        "ListLayout": {
+            "parameters": [
+                "backgroundImage",
+                "skillIcon",
+                "title",
+                "headerSubTitle",
+                "list",
+                "messaggio",
+                "secondoMessaggio",
+                "opzioni",
+                "number"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100%",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${backgroundImage}",
+                            "scale": "best-fill",
+                            "height": "100vh",
+                            "width": "100vw",
+                            "position": "absolute",
+                            "opacity": "0.5"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "${title}",
+                            "headerSubtitle":"${headerSubTitle}",
+                            "headerAttributionImage": "${skillIcon}"
+                        },
+                        {
+                            "type": "Text",
+                            "width": "100%",
+                            "textAlign": "center",
+                            "style": "textStylePrimary",
+                            "text": "${messaggio}",
+                            "paddingTop": 16,
+                            "paddingRight": 40,
+                            "paddingLeft": 40
+                        },
+                        {
+                            "type": "Text",
+                            "width": "100%",
+                            "textAlign": "center",
+                            "style": "textStylePrimary",
+                            "text": "${secondoMessaggio}",
+                            "paddingTop": 10,
+                            "paddingBottom": 10,
+                            "paddingRight": 25,
+                            "paddingLeft": 16
+                        },
+                        {
+                            "type": "Text",
+                            "width": "100%",
+                            "textAlign": "center",
+                            "style": "textStylePrimary",
+                            "text": "${opzioni}",
+                            "paddingTop": 16,
+                            "paddingBottom": 50,
+                            "paddingRight": 25,
+                            "paddingLeft": 16
+                        },
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "horizontal",
+                            "width":"auto",
+                            "alignSelf":"center",
+                            "data": "${list}",
+                            "height": "60vh",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "HorizontalListItem",
+                                    "paddingRight": 15,
+                                    "paddingLeft": 15
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "listData"
+        ],
+        "item": [
+            {
+                "type": "ListLayout",
+                "backgroundImage":  "${listData.properties.backgroundImage}",
+                "skillIcon": "${listData.properties.skillIcon}",
+                "title": "${listData.properties.title}",
+                "list": "${listData.properties.list.listItems}",
+                "messaggio": "${listData.properties.messaggio}",
+                "secondoMessaggio": "${listData.properties.secondoMessaggio}",
+                "opzioni": "${listData.properties.opzioni}"
+            }
+        ]
+    }
+}
